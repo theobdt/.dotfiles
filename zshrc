@@ -83,14 +83,15 @@ bindkey '^e' edit-command-line
 [ "$TMUX" ] && alias exit="tmux detach"
 
 #python
-VIRTUAL_ENV_DISABLE_PROMPT=1
-source ~/envs/py36/bin/activate
+#VIRTUAL_ENV_DISABLE_PROMPT=1
+#source ~/envs/py36/bin/activate
 
 #aliases
 [ -f ~/.bash_aliases ] && source ~/.bash_aliases
 alias ls="ls --color=auto"
 alias o="emacs -nw ~/org"
 alias la="ls -a"
+alias e="vim"
 #alias agenda="vim .org +OrgAgendaWeek"
 
 #spark installation

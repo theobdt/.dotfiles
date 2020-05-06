@@ -2,7 +2,6 @@
 echo -e "\n### INSTALLING DOTFILES"
 
 echo -e "\n### INSTALLING DEPENDENCIES"
-apt install -y zsh vim tmux urlview xclip
 
 echo -e "\n### LINKING DOTFILES"
 export XDG_CONFIG_HOME="$HOME/.config"
@@ -20,7 +19,6 @@ mkdir -p $ZINIT_HOME
 git clone https://github.com/zdharma/zinit.git $ZINIT_HOME/bin
 source $ZINIT_HOME/bin/zinit.zsh
 echo -e "\n### CHANGING LOGIN SHELL"
-sudo chsh -s $(which zsh)
 
 source "$XDG_CONFIG_HOME/env"
 
