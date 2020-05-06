@@ -22,6 +22,7 @@ mkdir -p "$XDG_CACHE_HOME/zsh"
 # vim
 export VIMINIT='let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | source $MYVIMRC'
 
-# tmux
-alias tmux="tmux -f "$XDG_CONFIG_HOME"/tmux/tmux.conf"
+# tmux:
+export TMUX_CONF="$XDG_CONFIG_HOME/tmux/tmux.conf"
 export TMUX_TMPDIR="$XDG_RUNTIME_DIR"
+alias tmux="tmux -f $TMUX_CONF"
