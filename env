@@ -1,0 +1,27 @@
+#!/bin/sh
+
+# default programs
+export EDITOR="vim"
+export BROWSER="firefox"
+
+# load gtk theme
+#export QT_QPA_PLATFORMTHEME=gtk2
+
+# set xdg base directories
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_DATA_HOME="$HOME/.local/share"
+
+# manual config file setup
+
+# zsh
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+export HISTFILE="$XDG_DATA_HOME/zsh/history"
+mkdir -p "$XDG_CACHE_HOME/zsh"
+
+# vim
+export VIMINIT='let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | source $MYVIMRC'
+
+# tmux
+alias tmux="tmux -f "$XDG_CONFIG_HOME"/tmux/tmux.conf"
+export TMUX_TMPDIR="$XDG_RUNTIME_DIR"
