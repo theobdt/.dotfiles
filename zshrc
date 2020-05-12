@@ -99,3 +99,5 @@ export SPARK_HOME=/usr/local/spark-3.0.0-preview2-bin-hadoop2.7
 export PATH=$SPARK_HOME/bin:$PATH
 export PATH=$SPARK_HOME/bin:$PATH
 export PATH="$HOME/.scripts:$PATH"
+#for wsl
+export DISPLAY=:0
