@@ -65,7 +65,6 @@ let g:gruvbox_contrast_dark='medium'
 hi Normal ctermfg=15
 "set termguicolors
 
-set mouse=a
 
 """""""""""""""""""
 " CUSTOM BINDINGS "
@@ -127,8 +126,9 @@ nnoremap zj :resize +2<CR>
 nnoremap zk :resize -2<CR>
 
 " disable mouse
-set mouse=
-set ttymouse=
+"set mouse=
+set mouse=a
+"set ttymouse=
 
 """"""""""
 " PYTHON "
