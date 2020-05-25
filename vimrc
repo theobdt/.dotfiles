@@ -50,7 +50,7 @@ filetype plugin indent on    " required
 """""""""""
 " GENERAL "
 """""""""""
-" colors
+set wildmenu
 
 """"""""""
 " VISUAL "
@@ -71,6 +71,7 @@ hi Normal ctermfg=15
 """""""""""""""""""
 
 " system clipboard
+set clipboard=unnamedplus
 vnoremap [y "+y
 nnoremap [p "+p
 
@@ -183,12 +184,12 @@ let g:jedi#popup_on_dot = 0
 let g:jedi#popup_select_first = 0
 let g:jedi#goto_command = "<leader>d"
 let g:jedi#goto_assignments_command = ""
-let g:jedi#goto_stubs_command = "<leader>s"
+let g:jedi#goto_stubs_command = ""
 let g:jedi#goto_definitions_command = ""
 let g:jedi#documentation_command = "<leader>e"
 let g:jedi#usages_command = "<leader>n"
 let g:jedi#completions_command = "<C-Space>"
-let g:jedi#rename_command = "<leader>r"
+let g:jedi#rename_command = "<leader>q"
 
 
 "let g:ale_lint_delay
@@ -205,7 +206,8 @@ let g:jedi#rename_command = "<leader>r"
 let maplocalleader = "t"
 let g:vimtex_fold_enabled=1
 set fillchars=fold:\ 
-let g:vimtex_quickfix_ignore_filters = ['Font Warning']
+let g:vimtex_quickfix_ignore_filters = ['Font Warning', 'Missing', 'nips']
+"let g:vimtex_quickfix_open_on_warning = 0
 " should be "\ "
 
 """""""""""""""""

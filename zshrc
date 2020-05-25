@@ -23,6 +23,9 @@ zinit snippet OMZ::plugins/docker/_docker
 zinit snippet OMZ::plugins/docker-compose/_docker-compose
 
 #zinit ice svn
+#zinit load RobertDeRose/virtualenv-autodetect
+
+#zinit ice svn
 #zinit snippet PZT::modules/docker
 
 zinit wait'!' lucid for \
@@ -92,6 +95,7 @@ alias ls="ls --color=auto"
 alias o="emacs -nw ~/org"
 alias la="ls -a"
 alias e="vim"
+alias venv="source .venv/bin/activate"
 #alias agenda="vim .org +OrgAgendaWeek"
 
 #spark installation
