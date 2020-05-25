@@ -96,6 +96,7 @@ alias o="emacs -nw ~/org"
 alias la="ls -a"
 alias e="vim"
 alias venv="source .venv/bin/activate"
+alias r="ranger"
 #alias agenda="vim .org +OrgAgendaWeek"
 
 #spark installation

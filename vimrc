@@ -38,15 +38,21 @@ Plugin 'lervag/vimtex'
 " Markdown
 "Plugin 'godlygeek/tabular'
 "Plugin 'plasticboy/vim-markdown'
-
+"Plugin 'masukomi/vim-markdown-folding' 
 
 " colorscheme
 Plugin 'rafi/awesome-vim-colorschemes' 
+
+"start page
+Plugin 'mhinz/vim-startify'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
 
+if has("autocmd")
+  filetype plugin indent on
+endif
 """""""""""
 " GENERAL "
 """""""""""
@@ -75,12 +81,16 @@ set clipboard=unnamedplus
 vnoremap [y "+y
 nnoremap [p "+p
 
+"insert date
+nnoremap <F3> i<C-R>=strftime("%Y-%m-%d %a %H:%M")<CR><Esc>
+inoremap <F3> <C-R>=strftime("%Y-%m-%d %a %H:%M")<CR>
+
 " Highlight search
 nnoremap ,s :set hlsearch!<CR>
 
 " Change wrapped line
-nnoremap zj gj
-nnoremap zk gk
+"nnoremap zj gj
+"nnoremap zk gk
 
 " Move faster
 nnoremap K 5kz.
@@ -121,16 +131,25 @@ nnoremap <c-h> <c-w><c-h>
 nnoremap <c-l> <c-w><c-l>
 
 " Resize panels
-nnoremap zl :vertical resize +5<CR>
-nnoremap zh :vertical resize -5<CR>
-nnoremap zj :resize +2<CR>
-nnoremap zk :resize -2<CR>
+"nnoremap zl :vertical resize +5<CR>
+"nnoremap zh :vertical resize -5<CR>
+"nnoremap zj :resize +2<CR>
+"nnoremap zk :resize -2<CR>
 
 " disable mouse
 "set mouse=
 set mouse=a
 "set ttymouse=
 
+"""""""
+"NOTES"
+"""""""
+autocmd BufNewFile,BufReadPost *.md let g:markdown_folding=1 | set filetype=markdown
+let g:startify_file_number = 5
+"let g:startify_lists = [\ { 'type': 'bookmarks', 'header': [   'Bookmarks:']      },\ { 'type': 'files', 'header': [   'Remember Me:']       },\ ]
+let g:startify_bookmarks = [{'r':'~/.config/vim/vimrc'}, {'n':'~/notes/meeting_notes.md'}]
+"let g:vim_markdown_folding_disabled=0
+"let g:vim_markdown_folding_style_pythonic=1
 """"""""""
 " PYTHON "
 """"""""""
@@ -224,16 +243,15 @@ let g:vim_markdown_folding_disabled = 1
 nnoremap ,ww :e ~/Documents/notes/index.md<cr>
 nnoremap ,v :MarkdownPreview<cr> 
 
-"let cmd = "detex " . filename . " | wc -w | tr -d [:space:]"
 " count number of words
-function! WC()
-    let filename = expand("%")
-    let cmd = "detex " . filename . " | wc -w"
-    let result = system(cmd)
-    echo result 
-endfunction
+"function! WC()
+    "let filename = expand("%")
+    "let cmd = "detex " . filename . " | wc -w"
+    "let result = system(cmd)
+    "echo result 
+"endfunction
 
-command WC call WC()
+"command WC call WC()
 
 " spell checking
 " 1) :set spell
