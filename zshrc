@@ -82,7 +82,7 @@ autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
 
 #tmux
-[ -z "$TMUX" ] && tmux new-session
+[ -z "$TMUX" ] && tmux -f $TMUX_CONF
 [ "$TMUX" ] && alias exit="tmux detach"
 
 #python
