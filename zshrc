@@ -65,6 +65,10 @@ zinit light zdharma/fast-syntax-highlighting
 bindkey -v
 export KEYTIMEOUT=1
 
+#navigate previous commands
+bindkey "^P" up-line-or-search
+bindkey "^N" down-line-or-search
+
 autoload -U compinit
 zstyle ':completion:*' menu yes select
 zmodload zsh/complist
@@ -97,6 +101,8 @@ alias la="ls -a"
 alias e="vim"
 alias venv="source .venv/bin/activate"
 alias r="ranger"
+alias py="ipython3"
+alias grep="grep --color=auto"
 #alias agenda="vim .org +OrgAgendaWeek"
 
 #spark installation

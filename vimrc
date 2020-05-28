@@ -57,6 +57,9 @@ endif
 " GENERAL "
 """""""""""
 set wildmenu
+"jump quickfix
+nnoremap ]a :cn<CR>
+nnoremap [a :cp<CR>
 
 """"""""""
 " VISUAL "
@@ -111,7 +114,7 @@ vnoremap <C-[> <esc>
 inoremap <C-[> <esc>
 
 " Select word
-nnoremap <space> viw<left> 
+"nnoremap <space> viw<left> 
 
 " Add blank line
 nnoremap <Enter> o<Esc>
@@ -145,15 +148,23 @@ set mouse=a
 "NOTES"
 """""""
 autocmd BufNewFile,BufReadPost *.md let g:markdown_folding=1 | set filetype=markdown
-let g:startify_file_number = 5
+set foldlevelstart=20
+let g:startify_file_number = 2
 "let g:startify_lists = [\ { 'type': 'bookmarks', 'header': [   'Bookmarks:']      },\ { 'type': 'files', 'header': [   'Remember Me:']       },\ ]
-let g:startify_bookmarks = [{'r':'~/.config/vim/vimrc'}, {'n':'~/notes/meeting_notes.md'}]
+let g:startify_custom_header=[]
+let g:startify_bookmarks = [{'r':'~/.config/vim/vimrc'},
+            \ {'nm':'~/notes/meeting_notes.md'},
+            \ {'ns':'~/notes/self.md'},
+            \ {'v':'~/.config/env'},
+            \ {'z':'~/.config/zsh/.zshrc'}]
 "let g:vim_markdown_folding_disabled=0
 "let g:vim_markdown_folding_style_pythonic=1
 """"""""""
 " PYTHON "
 """"""""""
-
+"remap space key
+nnoremap <SPACE> <Nop>
+let mapleader=" "
 
 " Python setup
 filetype indent on
@@ -176,13 +187,10 @@ let g:polyglot_disabled = ['latex', 'markdown']
 ":ALEFix
 let g:ale_enabled = 0
 let g:ale_set_balloons = 1
-autocmd FileType python :ALEToggle
+"autocmd FileType python :ALEToggle
 "autocmd FileType tex :ALEToggle
 "let g:ale_linters = {'python': ['flake8'],'tex': ['chktex']}
 let g:ale_linters = {'python': ['flake8']}
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_enter = 0
-let g:ale_lint_on_save = 1
 let g:ale_echo_msg_format = '[%linter%] (%code%) %s'
 let g:ale_python_black_options ='-l 79' 
 let b:ale_fixers = {
@@ -191,24 +199,29 @@ let b:ale_fixers = {
             \}
 "ignore warning whitespace before colon (black compatibility)
 let g:ale_python_flake8_options ='--ignore=E203,W605' 
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_insert_leave = 1
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_enter = 0
 nmap <silent> ,d <Plug>(ale_previous_wrap)
 nmap <silent> ,f <Plug>(ale_next_wrap)
 nmap <silent> ,g <Plug>(ale_fix)
+nnoremap <leader>at :ALEToggle<CR>
 
 " jedi-vim
 autocmd FileType python setlocal completeopt-=preview
-let mapleader=","
 let g:jedi#show_call_signatures = "1"
 let g:jedi#popup_on_dot = 0
 let g:jedi#popup_select_first = 0
 let g:jedi#goto_command = "<leader>d"
-let g:jedi#goto_assignments_command = ""
-let g:jedi#goto_stubs_command = ""
+let g:jedi#goto_assignments_command = "<leader>c"
+let g:jedi#goto_stubs_command = "<leader>x"
 let g:jedi#goto_definitions_command = ""
 let g:jedi#documentation_command = "<leader>e"
 let g:jedi#usages_command = "<leader>n"
 let g:jedi#completions_command = "<C-Space>"
 let g:jedi#rename_command = "<leader>q"
+nnoremap <leader>q :ccl<CR>
 
 
 "let g:ale_lint_delay
