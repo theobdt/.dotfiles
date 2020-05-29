@@ -76,6 +76,7 @@ let mapleader=" "
 "fzf
 nnoremap <leader>s :Files<CR>
 nnoremap <leader>b :Buffers<CR>
+nnoremap <leader>w :Rg<CR>
 
 """"""""""
 " VISUAL "
