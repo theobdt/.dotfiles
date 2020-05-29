@@ -112,3 +112,5 @@ export PATH=$SPARK_HOME/bin:$PATH
 export PATH="$HOME/.scripts:$PATH"
 #for wsl
 export DISPLAY=:0
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

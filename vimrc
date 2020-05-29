@@ -46,6 +46,10 @@ Plugin 'rafi/awesome-vim-colorschemes'
 "start page
 Plugin 'mhinz/vim-startify'
 
+"fzf
+Plugin 'junegunn/fzf'
+Plugin 'junegunn/fzf.vim'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -57,9 +61,21 @@ endif
 " GENERAL "
 """""""""""
 set wildmenu
+set wildignorecase
+set smartcase
 "jump quickfix
-nnoremap ]a :cn<CR>
-nnoremap [a :cp<CR>
+nnoremap <leader>j :cn<CR>
+nnoremap <leader>k :cp<CR>
+nnoremap <leader>q :ccl<CR>
+
+
+"remap space key
+nnoremap <SPACE> <Nop>
+let mapleader=" "
+
+"fzf
+nnoremap <leader>s :Files<CR>
+nnoremap <leader>b :Buffers<CR>
 
 """"""""""
 " VISUAL "
@@ -89,7 +105,7 @@ nnoremap <F3> i<C-R>=strftime("%Y-%m-%d %a %H:%M")<CR><Esc>
 inoremap <F3> <C-R>=strftime("%Y-%m-%d %a %H:%M")<CR>
 
 " Highlight search
-nnoremap ,s :set hlsearch!<CR>
+nnoremap <leader>a :set hlsearch!<CR>
 
 " Change wrapped line
 "nnoremap zj gj
@@ -121,7 +137,7 @@ nnoremap <Enter> o<Esc>
 
 
 " Update .vimrc easily
-nnoremap ,r :split $MYVIMRC<cr> 
+nnoremap <leader>r :split $MYVIMRC<cr> 
 nnoremap <c-z> :source $MYVIMRC<cr>
 
 " New split open on the right
@@ -162,9 +178,6 @@ let g:startify_bookmarks = [{'r':'~/.config/vim/vimrc'},
 """"""""""
 " PYTHON "
 """"""""""
-"remap space key
-nnoremap <SPACE> <Nop>
-let mapleader=" "
 
 " Python setup
 filetype indent on
@@ -193,7 +206,7 @@ let g:ale_set_balloons = 1
 let g:ale_linters = {'python': ['flake8']}
 let g:ale_echo_msg_format = '[%linter%] (%code%) %s'
 let g:ale_python_black_options ='-l 79' 
-let b:ale_fixers = {
+let g:ale_fixers = {
             \'python': ['trim_whitespace', 'remove_trailing_lines', 'black'],
             \'tex': ['trim_whitespace', 'remove_trailing_lines', 'latexindent']
             \}
@@ -203,9 +216,9 @@ let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = 1
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_enter = 0
-nmap <silent> ,d <Plug>(ale_previous_wrap)
-nmap <silent> ,f <Plug>(ale_next_wrap)
-nmap <silent> ,g <Plug>(ale_fix)
+nmap <silent> <leader>d <Plug>(ale_previous_wrap)
+nmap <silent> <leader>f <Plug>(ale_next_wrap)
+nmap <silent> <leader>g <Plug>(ale_fix)
 nnoremap <leader>at :ALEToggle<CR>
 
 " jedi-vim
@@ -248,13 +261,13 @@ let g:vimtex_quickfix_ignore_filters = ['Font Warning', 'Missing', 'nips']
 
 
 " NerdCommenter
-nnoremap ,<space> :call NERDComment(0,"toggle")<CR>
-vnoremap ,<space> :call NERDComment(0,"toggle")<CR>
+"nnoremap ,<space> :call NERDComment(0,"toggle")<CR>
+"vnoremap ,<space> :call NERDComment(0,"toggle")<CR>
 
 " Notes
-let g:vim_markdown_folding_disabled = 1
-nnoremap ,ww :e ~/Documents/notes/index.md<cr>
-nnoremap ,v :MarkdownPreview<cr> 
+"let g:vim_markdown_folding_disabled = 1
+"nnoremap ,ww :e ~/Documents/notes/index.md<cr>
+"nnoremap ,v :MarkdownPreview<cr> 
 
 " count number of words
 "function! WC()
