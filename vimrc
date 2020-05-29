@@ -50,6 +50,8 @@ Plugin 'mhinz/vim-startify'
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
 
+Plugin 'tpope/vim-fugitive'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -67,7 +69,7 @@ set smartcase
 nnoremap <leader>j :cn<CR>
 nnoremap <leader>k :cp<CR>
 nnoremap <leader>q :ccl<CR>
-
+nnoremap <BS> <C-^>
 
 "remap space key
 nnoremap <SPACE> <Nop>
