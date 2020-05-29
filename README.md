@@ -2,7 +2,7 @@
 ## Install dependencies
 
 ```
-$ sudo apt install zsh tmux xclip urlview ranger bat
+$ sudo apt install zsh tmux xclip urlview ranger direnv
 $ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install
 ```
 

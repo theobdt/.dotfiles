@@ -2,6 +2,8 @@
 source $XDG_CONFIG_HOME/zsh/zinit/bin/zinit.zsh
 # A.
 setopt promptsubst
+setopt inc_append_history
+setopt share_history
 
 # B.
 zinit wait lucid for \
@@ -114,3 +116,5 @@ export PATH="$HOME/.scripts:$PATH"
 export DISPLAY=:0
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export DIRENV_LOG_FORMAT=""
+eval "$(direnv hook zsh)"

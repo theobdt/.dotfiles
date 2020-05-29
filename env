@@ -17,7 +17,8 @@ export XDG_DATA_HOME="$HOME/.local/share"
 # zsh
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 export HISTFILE="$XDG_DATA_HOME/zsh/history"
-mkdir -p "$XDG_CACHE_HOME/zsh"
+export SAVEHIST=100
+mkdir -p "$XDG_CACHE_HOME/zsh" "$XDG_DATA_HOME/zsh"
 
 # vim
 export VIMINIT='let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | source $MYVIMRC'
