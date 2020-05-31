@@ -52,6 +52,8 @@ Plugin 'junegunn/fzf.vim'
 
 Plugin 'tpope/vim-fugitive'
 
+Plugin 'chrisbra/Recover.vim' 
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -79,6 +81,12 @@ let mapleader=" "
 nnoremap <leader>s :Files<CR>
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>w :Rg<CR>
+
+"netrw
+let g:netrw_banner=0
+"let g:netrw_list_hide= '.*\.swp$,.DS_Store,*/tmp/*,*.so,*.swp,*.zip,*.git,^\.\.\=/\=$'
+"let g:netrw_hide=1
+let g:netrw_liststyle=3
 
 """"""""""
 " VISUAL "
@@ -175,6 +183,7 @@ let g:startify_bookmarks = [{'r':'~/.config/vim/vimrc'},
             \ {'nm':'~/notes/meeting_notes.md'},
             \ {'ns':'~/notes/self.md'},
             \ {'v':'~/.config/env'},
+            \ {'t':'.'},
             \ {'z':'~/.config/zsh/.zshrc'}]
 "let g:vim_markdown_folding_disabled=0
 "let g:vim_markdown_folding_style_pythonic=1
