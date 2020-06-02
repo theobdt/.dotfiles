@@ -211,6 +211,7 @@ let g:polyglot_disabled = ['latex', 'markdown']
 ":ALEDetail
 ":ALEFix
 let g:ale_enabled = 0
+let g:ale_echo_cursor = 1
 let g:ale_set_balloons = 1
 "autocmd FileType python :ALEToggle
 "autocmd FileType tex :ALEToggle
