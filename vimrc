@@ -54,6 +54,8 @@ Plugin 'tpope/vim-fugitive'
 
 Plugin 'chrisbra/Recover.vim' 
 
+Plugin 'mbbill/undotree'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -72,6 +74,8 @@ nnoremap <leader>j :cn<CR>
 nnoremap <leader>k :cp<CR>
 nnoremap <leader>q :ccl<CR>
 nnoremap <BS> <C-^>
+"avoid tmux typo
+nnoremap <C-a> <nop>
 
 "remap space key
 nnoremap <SPACE> <Nop>
@@ -79,7 +83,7 @@ let mapleader=" "
 
 "fzf
 nnoremap <leader>s :Files<CR>
-nnoremap <leader>b :Buffers<CR>
+nnoremap <leader>v :Buffers<CR>
 nnoremap <leader>w :Rg<CR>
 
 "netrw
@@ -123,8 +127,8 @@ nnoremap <leader>a :set hlsearch!<CR>
 "nnoremap zk gk
 
 " Move faster
-nnoremap K 5kz.
-nnoremap J 5jz.
+"nnoremap K 5kz.
+"nnoremap J 5jz.
 
 
 " Indent blocks
@@ -255,6 +259,17 @@ nnoremap <leader>q :ccl<CR>
             "\invalid-name,
             "\redefined-outer-name,
             "\using-constant-test --enable=line-too-long'
+            "
+" undotree
+let g:undotree_ShortIndicators=1
+nnoremap <leader>u :UndotreeToggle<cr>
+"function g:Undotree_CustomMap()
+nnoremap J <nop>
+nnoremap K <nop>
+function g:Undotree_CustomMap()
+    nmap <buffer> J <plug>UndotreeNextState
+    nmap <buffer> K <plug>UndotreePreviousState
+endfunc
 
 """""""""
 " LATEX "
