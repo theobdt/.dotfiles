@@ -68,12 +68,8 @@ endif
 """""""""""
 set wildmenu
 set wildignorecase
+set ignorecase
 set smartcase
-"jump quickfix
-nnoremap <leader>j :cn<CR>
-nnoremap <leader>k :cp<CR>
-nnoremap <leader>q :ccl<CR>
-nnoremap <BS> <C-^>
 "avoid tmux typo
 nnoremap <C-a> <nop>
 
@@ -204,6 +200,14 @@ set smarttab
 set encoding=utf-8
 autocmd FileType python set colorcolumn=80
 
+"highlight self
+augroup python
+    autocmd!
+    autocmd FileType python
+                \   syn keyword pythonSelf self
+                \ | highlight def link pythonSelf Special
+augroup end
+
 
 "vim polyglot
 let g:python_highlight_all = 1
@@ -264,8 +268,8 @@ nnoremap <leader>q :ccl<CR>
 let g:undotree_ShortIndicators=1
 nnoremap <leader>u :UndotreeToggle<cr>
 "function g:Undotree_CustomMap()
-nnoremap J <nop>
-nnoremap K <nop>
+"nnoremap J <nop>
+"nnoremap K <nop>
 function g:Undotree_CustomMap()
     nmap <buffer> J <plug>UndotreeNextState
     nmap <buffer> K <plug>UndotreePreviousState
@@ -347,3 +351,9 @@ if has("autocmd")
     \ endif
   au VimLeave * silent execute '!echo -ne "\e[ q"' | redraw!
 endif
+
+"jump quickfix
+nnoremap J :cn<CR>
+nnoremap K :cp<CR>
+nnoremap <leader>q :ccl<CR>
+nnoremap <BS> <C-^>

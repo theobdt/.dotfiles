@@ -105,6 +105,7 @@ alias venv="source .venv/bin/activate"
 alias r="ranger"
 alias py="ipython3"
 alias grep="grep --color=auto"
+alias gs="git status"
 #alias agenda="vim .org +OrgAgendaWeek"
 
 #spark installation
