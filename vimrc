@@ -171,6 +171,10 @@ nnoremap <c-l> <c-w><c-l>
 set mouse=a
 "set ttymouse=
 
+
+"makefiles
+autocmd FileType make set list listchars=tab:>-
+
 """""""
 "NOTES"
 """""""
@@ -232,7 +236,7 @@ let g:ale_fixers = {
             \'tex': ['trim_whitespace', 'remove_trailing_lines', 'latexindent']
             \}
 "ignore warning whitespace before colon (black compatibility)
-let g:ale_python_flake8_options ='--ignore=E203,W605' 
+let g:ale_python_flake8_options ='--ignore=E203,W605,W503' 
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = 1
 let g:ale_lint_on_save = 1
@@ -355,5 +359,5 @@ endif
 "jump quickfix
 nnoremap J :cn<CR>
 nnoremap K :cp<CR>
-nnoremap <leader>q :ccl<CR>
+nnoremap <leader>m :ccl<CR>
 nnoremap <BS> <C-^>
