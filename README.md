@@ -11,6 +11,15 @@ sudo add-apt-repository ppa:jonathonf/vim
 sudo apt update
 sudo apt install vim
 ```
+
+Then `:PluginInstall` in vim.
+
+### Code
+```
+$ pip3 install black
+$ sudo apt install flake8
+```
+
 ### FZF
 ```
 $ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install
