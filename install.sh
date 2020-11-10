@@ -11,6 +11,7 @@ ln -si "$PWD/env" "$XDG_CONFIG_HOME/env"
 ln -si "$PWD/vimrc" "$XDG_CONFIG_HOME/vim/vimrc"
 ln -si "$PWD/tmux.conf" "$XDG_CONFIG_HOME/tmux/tmux.conf"
 ln -si "$PWD/zshrc" "$XDG_CONFIG_HOME/zsh/.zshrc"
+ln -si "$PWD/profile" "$HOME/.profile"
 
 # zsh install zinit
 echo -e "\n### INSTALLING ZINIT"
