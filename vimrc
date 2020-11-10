@@ -20,11 +20,14 @@ call vundle#begin('$XDG_CONFIG_HOME/vim/bundle')
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'vim-airline/vim-airline'
+"Plugin 'vim-airline/vim-airline'
 
 " Python Autocompletion
 Plugin 'davidhalter/jedi-vim'
 Plugin 'ervandew/supertab'
+
+" closing brackets
+Plugin 'jiangmiao/auto-pairs'
 
 " syntax highlighting
 "Plugin 'sheerun/vim-polyglot'
@@ -36,9 +39,9 @@ Plugin 'dense-analysis/ale'
 Plugin 'lervag/vimtex'
 
 " Markdown
-"Plugin 'godlygeek/tabular'
-"Plugin 'plasticboy/vim-markdown'
-"Plugin 'masukomi/vim-markdown-folding' 
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
+""Plugin 'masukomi/vim-markdown-folding' 
 
 " colorscheme
 Plugin 'rafi/awesome-vim-colorschemes' 
@@ -55,6 +58,10 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'chrisbra/Recover.vim' 
 
 Plugin 'mbbill/undotree'
+
+Plugin 'evansalter/vim-checklist'
+
+Plugin 'junegunn/goyo.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -81,6 +88,8 @@ let mapleader=" "
 nnoremap <leader>s :Files<CR>
 nnoremap <leader>v :Buffers<CR>
 nnoremap <leader>w :Rg<CR>
+"let g:fzf_preview_window = ['up:0%:hidden', 'ctrl-/']
+let g:fzf_layout = { 'down': '~25%' }
 
 "netrw
 let g:netrw_banner=0
@@ -96,6 +105,8 @@ set background=dark
 set number relativenumber
 set wrap
 colorscheme gruvbox
+"colorscheme nord
+"colorscheme anderson
 let g:gruvbox_contrast_dark='medium'
 " change color foreground to white
 hi Normal ctermfg=15
@@ -178,8 +189,52 @@ autocmd FileType make set list listchars=tab:>-
 """""""
 "NOTES"
 """""""
-autocmd BufNewFile,BufReadPost *.md let g:markdown_folding=1 | set filetype=markdown
-set foldlevelstart=20
+function! MyMarkdownLint() abort
+    let g:markdown_folding=1
+    let g:markdown_flavor='github'
+    let g:vim_markdown_folding_style_pythonic = 1
+    set conceallevel=2
+    let g:vim_markdown_conceal_code_blocks = 0
+    let g:vim_markdown_math = 1
+    let g:vim_markdown_new_list_item_indent = 2
+    "set foldlevelstart=20
+    let g:vim_markdown_folding_level = 6
+    hi! link htmlH1 GruvboxRedBold
+    hi! link htmlH2 GruvboxOrangeBold
+    hi! link htmlH3 GruvboxYellow
+    hi! link htmlH4 GruvboxAqua
+    hi! link htmlH5 GruvboxBlue
+    hi! link htmlH6 GruvboxGray
+    hi! link mkdHeading GruvboxGray
+endfunction
+autocmd BufNewFile,BufReadPost *.md call MyMarkdownLint() | set filetype=markdown
+
+"hi! link mkdListItem markdownListMarker
+"hi! link mkdListItemLine markdownListMarker
+"hi! link mkdBold Bold
+"hi! link mkdItalic Italic
+"call s:hi("mkdCode", s:nord7_gui, "", s:nord7_term, "", "", "")
+"call s:hi("mkdFootnote", s:nord8_gui, "", s:nord8_term, "", "", "")
+"call s:hi("mkdRule", s:nord10_gui, "", s:nord10_term, "", "", "")
+"call s:hi("mkdLineBreak", s:nord9_gui, "", s:nord9_term, "", "", "")
+"hi! link mkdBold Bold
+"hi! link mkdItalic Italic
+"hi! link mkdString Keyword
+"hi! link mkdCodeStart mkdCode
+"hi! link mkdCodeEnd mkdCode
+"hi! link mkdBlockquote Comment
+"hi! link mkdListItem Keyword
+"hi! link mkdListItemLine Normal
+"hi! link mkdFootnotes mkdFootnote
+"hi! link mkdLink markdownLinkText
+"hi! link mkdURL markdownUrl
+"hi! link mkdInlineURL mkdURL
+"hi! link mkdID Identifier "CHECK
+"hi! link mkdLinkDef mkdLink
+"hi! link mkdLinkDefTarget mkdURL
+"hi! link mkdLinkTitle mkdInlineURL
+"hi! link mkdDelimiter Keyword
+
 let g:startify_file_number = 2
 "let g:startify_lists = [\ { 'type': 'bookmarks', 'header': [   'Bookmarks:']      },\ { 'type': 'files', 'header': [   'Remember Me:']       },\ ]
 let g:startify_custom_header=[]
@@ -216,7 +271,7 @@ augroup end
 "vim polyglot
 let g:python_highlight_all = 1
 "to avoid conflict with vimtex
-let g:polyglot_disabled = ['latex', 'markdown']
+"let g:polyglot_disabled = ['latex', 'markdown']
 
 "vim ale
 ":ALEInfo
@@ -228,7 +283,7 @@ let g:ale_set_balloons = 1
 "autocmd FileType python :ALEToggle
 "autocmd FileType tex :ALEToggle
 "let g:ale_linters = {'python': ['flake8'],'tex': ['chktex']}
-let g:ale_linters = {'python': ['flake8']}
+let g:ale_linters = {'python': ['flake8'], 'markdown':['languagetool']}
 let g:ale_echo_msg_format = '[%linter%] (%code%) %s'
 let g:ale_python_black_options ='-l 79' 
 let g:ale_fixers = {
@@ -237,14 +292,19 @@ let g:ale_fixers = {
             \}
 "ignore warning whitespace before colon (black compatibility)
 let g:ale_python_flake8_options ='--ignore=E203,W605,W503' 
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_insert_leave = 1
-let g:ale_lint_on_save = 1
-let g:ale_lint_on_enter = 0
+"let g:ale_lint_on_text_changed = 'never'
+"let g:ale_lint_on_insert_leave = 1
+"let g:ale_lint_on_save = 1
+"let g:ale_lint_on_enter = 0
 nmap <silent> <leader>d <Plug>(ale_previous_wrap)
 nmap <silent> <leader>f <Plug>(ale_next_wrap)
 nmap <silent> <leader>g <Plug>(ale_fix)
 nnoremap <leader>at :ALEToggle<CR>
+
+" ALE LanguageTool
+let g:ale_languagetool_executable="java"
+let g:ale_languagetool_options="-jar ~/Downloads/LanguageTool-4.7/languagetool-commandline.jar -l en-GB"
+"let g:ale_languagetool_options="-cp ~/Downloads/LanguageTool-4.7/languagetool-server.jar org.languagetool.server.HTTPServer --port 8081"
 
 " jedi-vim
 autocmd FileType python setlocal completeopt-=preview
@@ -284,6 +344,7 @@ endfunc
 """""""""
 
 " For Latex files
+let g:tex_flavor = 'latex'
 let maplocalleader = "t"
 let g:vimtex_fold_enabled=1
 set fillchars=fold:\ 
@@ -306,14 +367,14 @@ let g:vimtex_quickfix_ignore_filters = ['Font Warning', 'Missing', 'nips']
 "nnoremap ,v :MarkdownPreview<cr> 
 
 " count number of words
-"function! WC()
-    "let filename = expand("%")
-    "let cmd = "detex " . filename . " | wc -w"
-    "let result = system(cmd)
-    "echo result 
-"endfunction
+function! WC()
+    let filename = expand("%")
+    let cmd = "detex " . filename . " | wc -w"
+    let result = system(cmd)
+    echo result 
+endfunction
 
-"command WC call WC()
+command WC call WC()
 
 " spell checking
 " 1) :set spell
@@ -361,3 +422,28 @@ nnoremap J :cn<CR>
 nnoremap K :cp<CR>
 nnoremap <leader>m :ccl<CR>
 nnoremap <BS> <C-^>
+
+
+" custom commands
+
+"print syntax item id under cursor
+command  Syid :echo synIDattr(synID(line("."), col("."), 1), "name")
+
+function! s:syntax_query() abort
+  for id in synstack(line("."), col("."))
+    "echo synIDattr(id, "name")
+    execute 'hi' synIDattr(id, "name")
+  endfor
+endfunction
+command! SyntaxQuery call s:syntax_query()
+nnoremap <leader>, :SyntaxQuery<CR>
+
+
+"checkboxes
+let mapleader=" "
+nnoremap <leader>cg :ChecklistToggleCheckbox<cr>
+"nnoremap <leader>ce :ChecklistEnableCheckbox<cr>
+"nnoremap <leader>cd :ChecklistDisableCheckbox<cr>
+vnoremap <leader>cg :ChecklistToggleCheckbox<cr>
+"vnoremap <leader>ce :ChecklistEnableCheckbox<cr>
+"vnoremap <leader>cd :ChecklistDisableCheckbox<cr>
