@@ -80,6 +80,9 @@ set smartcase
 "avoid tmux typo
 nnoremap <C-a> <nop>
 
+" fix backspace
+set backspace=indent,eol,start
+
 "remap space key
 nnoremap <SPACE> <Nop>
 let mapleader=" "
@@ -90,6 +93,8 @@ nnoremap <leader>v :Buffers<CR>
 nnoremap <leader>w :Rg<CR>
 "let g:fzf_preview_window = ['up:0%:hidden', 'ctrl-/']
 let g:fzf_layout = { 'down': '~25%' }
+"let g:AutoPairsShortcutToggle = '<leader>p'
+let g:AutoPairsShortcutToggle = '<F4>'
 
 "netrw
 let g:netrw_banner=0

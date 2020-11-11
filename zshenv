@@ -1,6 +1,6 @@
 #! /bin/bash
 [ -f "$HOME/.config/env" ] && source "$HOME/.config/env"
-echo "ZSh env loaded"
+#echo "ZSh env loaded"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # >>> conda initialize >>>
@@ -17,5 +17,3 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-
-

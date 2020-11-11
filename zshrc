@@ -19,20 +19,16 @@ zinit snippet OMZ::plugins/colored-man-pages/colored-man-pages.plugin.zsh
 
 zinit snippet OMZ::plugins/docker/_docker
 
-#zinit ice svn pick"docker-compose.plugin.zsh"
-#zinit ice svn
-#zinit snippet OMZ::plugins/docker-compose/docker-compose.plugin.zsh
 zinit snippet OMZ::plugins/docker-compose/_docker-compose
 
-#zinit ice svn
-#zinit load RobertDeRose/virtualenv-autodetect
-
-#zinit ice svn
-#zinit snippet PZT::modules/docker
 
 zinit wait'!' lucid for \
     OMZL::prompt_info_functions.zsh \
     OMZT::robbyrussell
+    #OMZT::alanpeabody
+    #OMZT::gnzh
+
+
 
 zinit light zsh-users/zsh-autosuggestions
 bindkey '^ ' autosuggest-accept
@@ -88,8 +84,11 @@ autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
 
 #tmux
-[ -z "$TMUX" ] && tmux -f $TMUX_CONF
+#[ -z "$TMUX" ] && tmux -f $TMUX_CONF
 [ "$TMUX" ] && alias exit="tmux detach"
+
+# prompt
+
 
 #python
 #VIRTUAL_ENV_DISABLE_PROMPT=1
@@ -98,7 +97,6 @@ bindkey '^e' edit-command-line
 #aliases
 [ -f ~/.bash_aliases ] && source ~/.bash_aliases
 alias ls="ls --color=auto"
-alias o="emacs -nw ~/org"
 alias la="ls -a"
 alias e="vim"
 alias venv="source .venv/bin/activate"
@@ -106,16 +104,21 @@ alias r="ranger"
 alias py="python3 -m IPython"
 alias grep="grep --color=auto"
 alias gs="git status"
+alias ca="conda activate py38"
 #alias agenda="vim .org +OrgAgendaWeek"
 
 #spark installation
-export SPARK_HOME=/usr/local/spark-3.0.0-preview2-bin-hadoop2.7
-export PATH=$SPARK_HOME/bin:$PATH
-export PATH=$SPARK_HOME/bin:$PATH
-export PATH="$HOME/.scripts:$PATH"
+#export SPARK_HOME=/usr/local/spark-3.0.0-preview2-bin-hadoop2.7
+#export PATH=$SPARK_HOME/bin:$PATH
+#export PATH="$HOME/.scripts:$PATH"
+
 #for wsl
-export DISPLAY=:0
+#export DISPLAY=:0
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export DIRENV_LOG_FORMAT=""
-eval "$(direnv hook zsh)"
+
+# for direnv
+#export DIRENV_LOG_FORMAT=""
+#eval "$(direnv hook zsh)"
+
+source  ~/.zshenv > /dev/null
