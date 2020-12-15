@@ -5,9 +5,9 @@ echo -e "\n### INSTALLING DEPENDENCIES"
 
 echo -e "\n### LINKING DOTFILES"
 export XDG_CONFIG_HOME="$HOME/.config"
-mkdir -p "$XDG_CONFIG_HOME"/{vim,zsh,tmux}
+mkdir -p "$XDG_CONFIG_HOME"/{vim,zsh,tmux,env}
 ln -si "$PWD/zshenv" "$HOME/.zshenv"
-ln -si "$PWD/env" "$XDG_CONFIG_HOME/env"
+ln -si "$PWD/env*" "$XDG_CONFIG_HOME/env/"
 ln -si "$PWD/vimrc" "$XDG_CONFIG_HOME/vim/vimrc"
 ln -si "$PWD/tmux.conf" "$XDG_CONFIG_HOME/tmux/tmux.conf"
 ln -si "$PWD/zshrc" "$XDG_CONFIG_HOME/zsh/.zshrc"

@@ -104,19 +104,9 @@ alias r="ranger"
 alias py="python3 -m IPython"
 alias grep="grep --color=auto"
 alias gs="git status"
-alias ca="conda activate p38"
+alias ca="conda activate"
 alias tl="tmux list-sessions"
 alias ta="tmux attach -t"
-alias oarstat++="python2 /home/thoth/utils/thoth_utils/oarstat++.py"
-#alias agenda="vim .org +OrgAgendaWeek"
-
-#spark installation
-#export SPARK_HOME=/usr/local/spark-3.0.0-preview2-bin-hadoop2.7
-#export PATH=$SPARK_HOME/bin:$PATH
-#export PATH="$HOME/.scripts:$PATH"
-
-#for wsl
-#export DISPLAY=:0
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
