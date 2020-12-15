@@ -80,8 +80,8 @@ endif
 let mapleader=" "
 nnoremap <leader>; :UltiSnipsEdit<cr>
 let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 set wildmenu
 set wildignorecase

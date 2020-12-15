@@ -1,5 +1,7 @@
 #!/bin/bash
 
+alias meet="vim ~/thoth/meetings/general.md"
+
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/home/theo/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"

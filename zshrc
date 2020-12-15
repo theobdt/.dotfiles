@@ -17,9 +17,9 @@ PROMPT=''
 zinit snippet OMZ::lib/theme-and-appearance.zsh
 zinit snippet OMZ::plugins/colored-man-pages/colored-man-pages.plugin.zsh
 
-zinit snippet OMZ::plugins/docker/_docker
+#zinit snippet OMZ::plugins/docker/_docker
 
-zinit snippet OMZ::plugins/docker-compose/_docker-compose
+#zinit snippet OMZ::plugins/docker-compose/_docker-compose
 
 
 zinit wait'!' lucid for \
