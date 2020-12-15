@@ -63,6 +63,8 @@ Plugin 'evansalter/vim-checklist'
 
 Plugin 'junegunn/goyo.vim'
 
+Plugin 'SirVer/ultisnips'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -73,6 +75,14 @@ endif
 """""""""""
 " GENERAL "
 """""""""""
+
+"ultisnips
+let mapleader=" "
+nnoremap <leader>; :UltiSnipsEdit<cr>
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
 set wildmenu
 set wildignorecase
 set ignorecase
@@ -85,10 +95,9 @@ set backspace=indent,eol,start
 
 "remap space key
 nnoremap <SPACE> <Nop>
-let mapleader=" "
 
 "fzf
-nnoremap <leader>s :Files<CR>
+nnoremap <leader>s :GFiles<CR>
 nnoremap <leader>v :Buffers<CR>
 nnoremap <leader>w :Rg<CR>
 "let g:fzf_preview_window = ['up:0%:hidden', 'ctrl-/']
@@ -195,12 +204,15 @@ autocmd FileType make set list listchars=tab:>-
 "NOTES"
 """""""
 function! MyMarkdownLint() abort
-    let g:markdown_folding=1
+    setlocal shiftwidth=2 softtabstop=2 expandtab
+    "let g:markdown_folding=1
+    let g:markdown_folding=0
     let g:markdown_flavor='github'
     let g:vim_markdown_folding_style_pythonic = 1
-    set conceallevel=2
+    set conceallevel=0
     let g:vim_markdown_conceal_code_blocks = 0
-    let g:vim_markdown_math = 1
+    "let g:vim_markdown_math = 1
+    let g:vim_markdown_math = 0
     let g:vim_markdown_new_list_item_indent = 2
     "set foldlevelstart=20
     let g:vim_markdown_folding_level = 6
@@ -452,3 +464,8 @@ nnoremap <leader>cg :ChecklistToggleCheckbox<cr>
 vnoremap <leader>cg :ChecklistToggleCheckbox<cr>
 "vnoremap <leader>ce :ChecklistEnableCheckbox<cr>
 "vnoremap <leader>cd :ChecklistDisableCheckbox<cr>
+
+"remote sync
+"let rsync_remotepath="vasher:/home/tbodrito/sparse/baseline/"
+"let rsync_localpath="~/thoth/sync/baseline/"
+"nnoremap <expr>  <C-b> ":w<CR>:!rsync -avr " . rsync_localpath . " " . rsync_remotepath
