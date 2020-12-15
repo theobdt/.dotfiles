@@ -104,7 +104,10 @@ alias r="ranger"
 alias py="python3 -m IPython"
 alias grep="grep --color=auto"
 alias gs="git status"
-alias ca="conda activate py38"
+alias ca="conda activate p38"
+alias tl="tmux list-sessions"
+alias ta="tmux attach -t"
+alias oarstat++="python2 /home/thoth/utils/thoth_utils/oarstat++.py"
 #alias agenda="vim .org +OrgAgendaWeek"
 
 #spark installation
