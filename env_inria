@@ -1,5 +1,6 @@
 #!/bin/bash
 alias oarstat++="python2 /home/thoth/utils/thoth_utils/oarstat++.py"
+export PATH="$HOME/.scripts:$PATH"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
