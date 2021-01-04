@@ -97,7 +97,8 @@ set backspace=indent,eol,start
 nnoremap <SPACE> <Nop>
 
 "fzf
-nnoremap <leader>s :GFiles<CR>
+"nnoremap <leader>s :GFiles<CR>
+nnoremap <leader>s :Files<CR>
 nnoremap <leader>v :Buffers<CR>
 nnoremap <leader>w :Rg<CR>
 "let g:fzf_preview_window = ['up:0%:hidden', 'ctrl-/']
