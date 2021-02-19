@@ -33,3 +33,5 @@ alias tmux="tmux -f $TMUX_CONF"
 
 # taichi without OpenGL
 export TI_ENABLE_OPENGL=0
+
+[[ -n "$TMUX" ]] && export PANE_ID=`tmux run 'echo #{pane_index}'`

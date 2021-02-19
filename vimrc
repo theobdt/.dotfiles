@@ -65,6 +65,8 @@ Plugin 'junegunn/goyo.vim'
 
 Plugin 'SirVer/ultisnips'
 
+Plugin 'https://gitlab.com/dbeniamine/todo.txt-vim'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -75,9 +77,15 @@ endif
 """""""""""
 " GENERAL "
 """""""""""
+let mapleader=" "
+
+"enclose in quotes
+vnoremap mq c""<esc>P
+vnoremap ms c''<esc>P
+vnoremap mp c()<esc>P
+nnoremap <leader>mq viwc""<esc>P
 
 "ultisnips
-let mapleader=" "
 nnoremap <leader>; :UltiSnipsEdit<cr>
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
@@ -161,6 +169,7 @@ vnoremap < <gv
 inoremap jk <esc>
 inoremap JK <esc>
 inoremap jK <esc>
+noremap K <nop>
 
 set timeoutlen=1000 ttimeoutlen=0
 vnoremap <C-[> <esc>
@@ -200,6 +209,11 @@ set mouse=a
 
 "makefiles
 autocmd FileType make set list listchars=tab:>-
+
+" todo.txt
+let g:TodoTxtUseAbbrevInsertMode=1
+"completion
+au filetype todo setlocal omnifunc=todo#Complete
 
 """""""
 "NOTES"
@@ -264,7 +278,8 @@ let g:startify_bookmarks = [{'r':'~/.config/vim/vimrc'},
             \ {'z':'~/.config/zsh/.zshrc'}]
 "let g:vim_markdown_folding_disabled=0
 "let g:vim_markdown_folding_style_pythonic=1
-""""""""""
+
+
 " PYTHON "
 """"""""""
 
@@ -436,8 +451,10 @@ if has("autocmd")
 endif
 
 "jump quickfix
-nnoremap J :cn<CR>
-nnoremap K :cp<CR>
+nnoremap [q :cp<CR>
+nnoremap ]q :cn<CR>
+nnoremap [Q :cfirst<CR>
+nnoremap ]Q :clast<CR>
 nnoremap <leader>m :ccl<CR>
 nnoremap <BS> <C-^>
 

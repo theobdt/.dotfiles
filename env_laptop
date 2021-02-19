@@ -1,6 +1,12 @@
 #!/bin/bash
+export PATH="$HOME/.scripts:$PATH"
+export TODO_DIR="$HOME/.todo"
+export TODO_FILE="$TODO_DIR/todo.txt"
+export DONE_FILE="$TODO_DIR/done.txt"
 
 alias meet="vim ~/thoth/meetings/general.md"
+alias td="vim $TODO_DIR/todo.txt"
+alias nt="vim ~/notes/notes.md"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -17,4 +23,3 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-export PATH="$HOME/.scripts:$PATH"
