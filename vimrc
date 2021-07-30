@@ -79,6 +79,9 @@ endif
 """""""""""
 let mapleader=" "
 
+" git / fugitive
+command Gc Git commit -v
+
 "enclose in quotes
 vnoremap mq c""<esc>P
 vnoremap ms c''<esc>P
@@ -105,6 +108,9 @@ set backspace=indent,eol,start
 nnoremap <SPACE> <Nop>
 
 "fzf
+let g:fzf_action = {
+\ 'ctrl-x': 'split',
+\ 'ctrl-v': 'vsplit' }
 "nnoremap <leader>s :GFiles<CR>
 nnoremap <leader>s :Files<CR>
 nnoremap <leader>v :Buffers<CR>
@@ -131,8 +137,10 @@ colorscheme gruvbox
 "colorscheme nord
 "colorscheme anderson
 let g:gruvbox_contrast_dark='medium'
+
 " change color foreground to white
 hi Normal ctermfg=15
+"hi Normal ctermfg=7
 "set termguicolors
 
 
@@ -170,6 +178,7 @@ inoremap jk <esc>
 inoremap JK <esc>
 inoremap jK <esc>
 noremap K <nop>
+noremap J <nop>
 
 set timeoutlen=1000 ttimeoutlen=0
 vnoremap <C-[> <esc>
@@ -211,6 +220,7 @@ set mouse=a
 autocmd FileType make set list listchars=tab:>-
 
 " todo.txt
+" sort : tsp
 let g:TodoTxtUseAbbrevInsertMode=1
 "completion
 au filetype todo setlocal omnifunc=todo#Complete
@@ -240,6 +250,7 @@ function! MyMarkdownLint() abort
     hi! link mkdHeading GruvboxGray
 endfunction
 autocmd BufNewFile,BufReadPost *.md call MyMarkdownLint() | set filetype=markdown
+au BufNewFile,BufRead *.tex setlocal tabstop=2 softtabstop=2 shiftwidth=2
 
 "hi! link mkdListItem markdownListMarker
 "hi! link mkdListItemLine markdownListMarker
@@ -323,6 +334,10 @@ let g:ale_fixers = {
             \'python': ['trim_whitespace', 'remove_trailing_lines', 'black'],
             \'tex': ['trim_whitespace', 'remove_trailing_lines', 'latexindent']
             \}
+"let g:ale_fixers = {
+            "\'python': ['trim_whitespace', 'remove_trailing_lines'],
+            "\'tex': ['trim_whitespace', 'remove_trailing_lines', 'latexindent']
+            "\}
 "ignore warning whitespace before colon (black compatibility)
 let g:ale_python_flake8_options ='--ignore=E203,W605,W503' 
 "let g:ale_lint_on_text_changed = 'never'
@@ -482,6 +497,35 @@ nnoremap <leader>cg :ChecklistToggleCheckbox<cr>
 vnoremap <leader>cg :ChecklistToggleCheckbox<cr>
 "vnoremap <leader>ce :ChecklistEnableCheckbox<cr>
 "vnoremap <leader>cd :ChecklistDisableCheckbox<cr>
+
+augroup encrypted
+  au!
+
+  " First make sure nothing is written to ~/.viminfo while editing
+  " an encrypted file.
+  autocmd BufReadPre,FileReadPre *.gpg set viminfo=
+  " We don't want a swap file, as it writes unencrypted data to disk
+  autocmd BufReadPre,FileReadPre *.gpg set noswapfile
+
+  " Switch to binary mode to read the encrypted file
+  autocmd BufReadPre,FileReadPre *.gpg set bin
+  autocmd BufReadPre,FileReadPre *.gpg let ch_save = &ch|set ch=2
+  " (If you use tcsh, you may need to alter this line.)
+  autocmd BufReadPost,FileReadPost *.gpg '[,']!gpg2 --decrypt 2> /dev/null
+
+  " Switch to normal mode for editing
+  autocmd BufReadPost,FileReadPost *.gpg set nobin
+  autocmd BufReadPost,FileReadPost *.gpg let &ch = ch_save|unlet ch_save
+  autocmd BufReadPost,FileReadPost *.gpg execute ":doautocmd BufReadPost " . expand("%:r")
+
+  " Convert all text to encrypted text before writing
+  " (If you use tcsh, you may need to alter this line.)
+  "autocmd BufWritePre,FileWritePre *.gpg '[,']!gpg --default-recipient-self -ae 2>/dev/null
+  autocmd BufWritePre,FileWritePre *.gpg '[,']!gpg2 -c 2>/dev/null
+  " Undo the encryption so we are back in the normal text, directly
+  " after the file has been written.
+  autocmd BufWritePost,FileWritePost *.gpg u
+augroup END
 
 "remote sync
 "let rsync_remotepath="vasher:/home/tbodrito/sparse/baseline/"

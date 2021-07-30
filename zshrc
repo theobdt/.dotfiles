@@ -108,7 +108,6 @@ alias gs="git status"
 alias ca="conda activate"
 alias tl="tmux list-sessions"
 alias ta="tmux attach -t"
-alias monika='ssh edgar "curl edgar/monika" > /tmp/monika.html && firefox /tmp/monika.html'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 

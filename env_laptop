@@ -7,6 +7,8 @@ export DONE_FILE="$TODO_DIR/done.txt"
 alias meet="vim ~/thoth/meetings/general.md"
 alias td="vim $TODO_DIR/todo.txt"
 alias nt="vim ~/notes/notes.md"
+alias monika='ssh edgar "curl edgar/monika" > /tmp/monika.html && firefox /tmp/monika.html'
+alias monika_cpu='ssh access2-cp "curl visu-cp.inrialpes.fr/monika" > /tmp/monika.html && firefox /tmp/monika.html'
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -22,4 +24,4 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-
+eval `keychain --quiet --eval --agents ssh ~/.ssh/thoth`
