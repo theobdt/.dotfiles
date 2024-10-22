@@ -22,6 +22,9 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdcommenter'
 "Plugin 'vim-airline/vim-airline'
 
+" class outline
+Plugin 'preservim/tagbar'
+
 " Python Autocompletion
 Plugin 'davidhalter/jedi-vim'
 Plugin 'ervandew/supertab'
@@ -37,6 +40,8 @@ Plugin 'dense-analysis/ale'
 
 " Latex plugin
 Plugin 'lervag/vimtex'
+
+Plugin 'vimwiki/vimwiki'
 
 " Markdown
 Plugin 'godlygeek/tabular'
@@ -59,13 +64,15 @@ Plugin 'chrisbra/Recover.vim'
 
 Plugin 'mbbill/undotree'
 
-Plugin 'evansalter/vim-checklist'
+"Plugin 'evansalter/vim-checklist'
 
 Plugin 'junegunn/goyo.vim'
 
 Plugin 'SirVer/ultisnips'
 
-Plugin 'https://gitlab.com/dbeniamine/todo.txt-vim'
+"Plugin 'https://gitlab.com/dbeniamine/todo.txt-vim'
+Plugin 'dbeniamine/todo.txt-vim'
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -111,7 +118,7 @@ nnoremap <SPACE> <Nop>
 let g:fzf_action = {
 \ 'ctrl-x': 'split',
 \ 'ctrl-v': 'vsplit' }
-"nnoremap <leader>s :GFiles<CR>
+nnoremap <leader>y :GFiles<CR>
 nnoremap <leader>s :Files<CR>
 nnoremap <leader>v :Buffers<CR>
 nnoremap <leader>w :Rg<CR>
@@ -134,6 +141,8 @@ set background=dark
 set number relativenumber
 set wrap
 colorscheme gruvbox
+"colorscheme PaperColor
+"colorscheme lightning
 "colorscheme nord
 "colorscheme anderson
 let g:gruvbox_contrast_dark='medium'
@@ -234,7 +243,8 @@ function! MyMarkdownLint() abort
     let g:markdown_folding=0
     let g:markdown_flavor='github'
     let g:vim_markdown_folding_style_pythonic = 1
-    set conceallevel=0
+    "set conceallevel=0
+    set conceallevel=1
     let g:vim_markdown_conceal_code_blocks = 0
     "let g:vim_markdown_math = 1
     let g:vim_markdown_math = 0
@@ -285,6 +295,7 @@ let g:startify_bookmarks = [{'r':'~/.config/vim/vimrc'},
             \ {'nm':'~/notes/meeting_notes.md'},
             \ {'ns':'~/notes/self.md'},
             \ {'v':'~/.config/env'},
+            \ {'w':'~/vimwiki/index.md'},
             \ {'t':'.'},
             \ {'z':'~/.config/zsh/.zshrc'}]
 "let g:vim_markdown_folding_disabled=0
@@ -327,9 +338,12 @@ let g:ale_set_balloons = 1
 "autocmd FileType python :ALEToggle
 "autocmd FileType tex :ALEToggle
 "let g:ale_linters = {'python': ['flake8'],'tex': ['chktex']}
-let g:ale_linters = {'python': ['flake8'], 'markdown':['languagetool']}
+"let g:ale_linters = {'python': ['flake8'], 'markdown':['languagetool']}
 let g:ale_echo_msg_format = '[%linter%] (%code%) %s'
 let g:ale_python_black_options ='-l 79' 
+let b:ale_linter_aliases = {'tex': ['tex', 'text']}
+let g:vimtex_compiler_latexmk = {'build_dir' : 'build'}
+let g:ale_linters = {'python': ['flake8'], 'tex':['languagetool']}
 let g:ale_fixers = {
             \'python': ['trim_whitespace', 'remove_trailing_lines', 'black'],
             \'tex': ['trim_whitespace', 'remove_trailing_lines', 'latexindent']
@@ -351,7 +365,9 @@ nnoremap <leader>at :ALEToggle<CR>
 
 " ALE LanguageTool
 let g:ale_languagetool_executable="java"
-let g:ale_languagetool_options="-jar ~/Downloads/LanguageTool-4.7/languagetool-commandline.jar -l en-GB"
+"let g:ale_languagetool_options="-jar ~/Downloads/LanguageTool-4.7/languagetool-commandline.jar -l en-GB"
+let g:ale_languagetool_options="-jar ~/Downloads/LanguageTool-5.5/languagetool-commandline.jar -l en-US -d MORFOLOGIK_RULE_EN_US"
+"MORFOLOGIK_RULE_EN_US
 "let g:ale_languagetool_options="-cp ~/Downloads/LanguageTool-4.7/languagetool-server.jar org.languagetool.server.HTTPServer --port 8081"
 
 " jedi-vim
@@ -393,10 +409,11 @@ endfunc
 
 " For Latex files
 let g:tex_flavor = 'latex'
-let maplocalleader = "t"
+let maplocalleader = "t" " also for todo.txt-vim
 let g:vimtex_fold_enabled=1
 set fillchars=fold:\ 
 let g:vimtex_quickfix_ignore_filters = ['Font Warning', 'Missing', 'nips']
+"let g:vimtex_latexmk_options = '-pdf -shell-escape -verbose -file-line-error -synctex=1 -interaction=nonstopmode'
 "let g:vimtex_quickfix_open_on_warning = 0
 " should be "\ "
 
@@ -490,13 +507,63 @@ nnoremap <leader>, :SyntaxQuery<CR>
 
 
 "checkboxes
-let mapleader=" "
-nnoremap <leader>cg :ChecklistToggleCheckbox<cr>
-"nnoremap <leader>ce :ChecklistEnableCheckbox<cr>
-"nnoremap <leader>cd :ChecklistDisableCheckbox<cr>
-vnoremap <leader>cg :ChecklistToggleCheckbox<cr>
+"let mapleader=" "
+"nnoremap <leader>cg :ChecklistToggleCheckbox<cr>
+""nnoremap <leader>ce :ChecklistEnableCheckbox<cr>
+""nnoremap <leader>cd :ChecklistDisableCheckbox<cr>
+"vnoremap <leader>cg :ChecklistToggleCheckbox<cr>
 "vnoremap <leader>ce :ChecklistEnableCheckbox<cr>
 "vnoremap <leader>cd :ChecklistDisableCheckbox<cr>
+"
+" VIMWIKI
+nmap <Plug>NoVimwikiIndex                  <Plug>VimwikiIndex
+nmap <Plug>NoVimwikiTabIndex               <Plug>VimwikiTabIndex
+nmap <Plug>NoVimwikiUISelect               <Plug>VimwikiUISelect
+nmap <Plug>NoVimwikiDiaryIndex             <Plug>VimwikiDiaryIndex
+nmap <Plug>NoVimwikiMakeDiaryNote          <Plug>VimwikiMakeDiaryNote
+nmap <Plug>NoVimwikiTabMakeDiaryNote       <Plug>VimwikiTabMakeDiaryNote
+nmap <Plug>NoVimwikiMakeYesterdayDiaryNote <Plug>VimwikiMakeYesterdayDiaryNote
+nmap <Plug>NoVimwikiMakeTomorrowDiaryNote  <Plug>VimwikiMakeTomorrowDiaryNote
+nmap <Plug>NoVimwiki2HTML                  <Plug>Vimwiki2HTML
+nmap <Plug>NoVimwiki2HTMLBrowse            <Plug>Vimwiki2HTMLBrowse
+nmap <Plug>NoVimwikiDiaryGenerateLinks     <Plug>VimwikiDiaryGenerateLinks
+nmap <Plug>NoVimwikiDeleteFile             <Plug>VimwikiDeleteFile
+nmap <Plug>NoVimwikiRenameFile             <Plug>VimwikiRenameFile
+nmap <Plug>NoVimwikiRenameFile             <Plug>VimwikiRenameFile
+nmap <Plug>NoVimwikiGoBackLink             <Plug>VimwikiGoBackLink
+"nmap <Plug>NoVimwikiFollowLink             <Plug>VimwikiFollowLink
+nmap <SPACE>l             <Plug>VimwikiFollowLink
+
+nmap <leader>nw                  <Plug>VimwikiIndex
+let g:vimwiki_list = [{'syntax': 'markdown', 'ext': '.md'}]
+let g:vimwiki_ext2syntax = {'.md': 'markdown'}
+let g:vimwiki_markdown_link_ext = 1
+let g:vimwiki_global_ext = 1
+let g:vimwiki_key_mappings = { 'table_mappings': 0 }
+
+" vimwiki checklist checkbox todo list leader
+" gln or glp to change status
+
+"let g:vimwiki_list = [{'path': $HOME, 'syntax': 'markdown', 'ext': '.md'}]
+
+let g:vimwiki_folding = 'expr'
+
+autocmd FileType vimwiki setlocal syntax=markdown
+
+autocmd FileType vimwiki setlocal foldenable
+
+"nmap <silent> <Plug>VimwikiTabIndex
+"nmap <silent> <Plug>VimwikiUISelect
+"nmap <silent> <Plug>VimwikiDiaryIndex
+"nmap <silent> <Plug>VimwikiMakeDiaryNote
+"nmap <silent> <Plug>VimwikiTabMakeDiaryNote
+"nmap <silent> <Plug>VimwikiMakeYesterdayDiaryNote
+"nmap <silent> <Plug>VimwikiMakeTomorrowDiaryNote
+"nmap <silent> <Plug>Vimwiki2HTML
+"nmap <silent> <Plug>Vimwiki2HTMLBrowse
+"nmap <silent> <Plug>VimwikiDiaryGenerateLinks
+"nmap <silent> <Plug>VimwikiDeleteFile
+"nmap <silent> <Plug>VimwikiRenameFile
 
 augroup encrypted
   au!
@@ -531,3 +598,23 @@ augroup END
 "let rsync_remotepath="vasher:/home/tbodrito/sparse/baseline/"
 "let rsync_localpath="~/thoth/sync/baseline/"
 "nnoremap <expr>  <C-b> ":w<CR>:!rsync -avr " . rsync_localpath . " " . rsync_remotepath
+"
+"
+
+" tagbar
+nmap <F8> :TagbarToggle<CR>
+"let g:tagbar_width = max([25, winwidth(0) / 1])
+let g:tagbar_width = 40
+
+set complete=.
+
+
+" highlight word under cursor without jumping to it 
+nnoremap * :keepjumps normal! mi*`i<CR>
+
+" do not jump to word after search
+nnoremap / :setl hls \| let @/ = input('/')<cr>
+
+augroup SetCMS
+    autocmd FileType vimwiki let &l:commentstring='<!-- %s -->'
+augroup END

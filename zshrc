@@ -32,6 +32,8 @@ zinit wait'!' lucid for \
 
 zinit light zsh-users/zsh-autosuggestions
 bindkey '^ ' autosuggest-accept
+bindkey '^[h' backward-word
+bindkey '^[l' forward-word
 
 zinit light zdharma/fast-syntax-highlighting
 
@@ -109,7 +111,10 @@ alias ca="conda activate"
 alias tl="tmux list-sessions"
 alias ta="tmux attach -t"
 
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# use fd instead of find (faster), and exclue some directories
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git --exclude "**/__pycache__/*"'
 
 # for direnv
 #export DIRENV_LOG_FORMAT=""
