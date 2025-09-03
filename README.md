@@ -30,6 +30,8 @@ Or compile from source, following the instructions [here](https://github.com/ycm
 4. `make`
 5. `make install`
 
+IMPORTANT: to get clipboard functionalities: `sudo apt install vim-gui-commmon`
+
 
 ### Code
 ```

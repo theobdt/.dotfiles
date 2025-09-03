@@ -1,6 +1,7 @@
 ARROW="%(?:%{$fg_bold[green]%}➜  :%{$fg_bold[red]%}➜ "
 
-PROMPT="%{$reset_color%}%{$fg[magenta]%}$(whoami)%{$fg_bold[magenta]%}@$(hostname)"
+#PROMPT="%{$reset_color%}%{$fg[magenta]%}$(whoami)%{$fg_bold[magenta]%}@$(hostname)"
+PROMPT="%{$reset_color%}%{$fg_bold[magenta]%}@$(hostname)"
 PROMPT+=' %{$fg[cyan]%}%~%{$reset_color%} $(git_prompt_info)'
 PROMPT+=$'\n''$ARROW'
 

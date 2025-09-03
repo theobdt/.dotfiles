@@ -9,21 +9,21 @@ alias td="vim $TODO_DIR/todo.txt"
 alias nt="vim ~/notes/notes.md"
 alias bib="vim ~/notes/exo_bib.md"
 alias monika='ssh edgar "curl edgar/monika" > /tmp/monika.html && firefox /tmp/monika.html'
-alias monika_cpu='ssh access2-cp "curl visu-cp.inrialpes.fr/monika" > /tmp/monika.html && firefox /tmp/monika.html'
+alias monika_cpu='ssh access2-cp "curl visu-cp.inrialpes.fr/monika" > ~/monika.html && firefox ~/monika.html'
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/theo/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/theo/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/theo/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/theo/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
+#__conda_setup="$('/home/theo/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+#if [ $? -eq 0 ]; then
+    #eval "$__conda_setup"
+#else
+    #if [ -f "/home/theo/miniconda3/etc/profile.d/conda.sh" ]; then
+        #. "/home/theo/miniconda3/etc/profile.d/conda.sh"
+    #else
+        #export PATH="/home/theo/miniconda3/bin:$PATH"
+    #fi
+#fi
+#unset __conda_setup
 # <<< conda initialize <<<
 #eval `keychain --quiet --eval --agents ssh ~/.ssh/thoth`
-eval `keychain --quiet --eval --agents ssh ~/.ssh/thoth ~/.ssh/jeanzay`
+#eval `keychain --quiet --eval --agents ssh ~/.ssh/thoth ~/.ssh/jeanzay`

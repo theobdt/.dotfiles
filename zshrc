@@ -1,11 +1,18 @@
 ## PLUGINS
-source $XDG_CONFIG_HOME/zsh/zinit/bin/zinit.zsh
+#source $XDG_CONFIG_HOME/zsh/zinit/bin/zinit.zsh
+source /home/theo/.local/share/zinit/zinit.git/zinit.zsh
+
+export HISTFILE="/home/theo/.history"
+export SAVEHIST=5000
 # A.
 setopt promptsubst
-setopt inc_append_history
+#setopt inc_append_history
 setopt share_history
 
 # B.
+#
+#zinit snippet OMZL::async_prompt # Shorthand OMZ/lib/
+
 zinit wait lucid for \
         OMZL::git.zsh \
   atload"unalias grv" \
@@ -17,6 +24,8 @@ PROMPT=''
 zinit snippet OMZ::lib/theme-and-appearance.zsh
 zinit snippet OMZ::plugins/colored-man-pages/colored-man-pages.plugin.zsh
 
+#zi ice from"gh-r" as"program"
+#zi light junegunn/fzf
 #zinit snippet OMZ::plugins/docker/_docker
 
 #zinit snippet OMZ::plugins/docker-compose/_docker-compose
@@ -24,16 +33,18 @@ zinit snippet OMZ::plugins/colored-man-pages/colored-man-pages.plugin.zsh
 
 zinit wait'!' lucid for \
     OMZL::prompt_info_functions.zsh \
+    OMZL::async_prompt.zsh \
     OMZT::robbyrussell
     #OMZT::alanpeabody
     #OMZT::gnzh
 
 
 
-zinit light zsh-users/zsh-autosuggestions
-bindkey '^ ' autosuggest-accept
-bindkey '^[h' backward-word
-bindkey '^[l' forward-word
+#zinit light zsh-users/zsh-autosuggestions
+#bindkey '^ ' autosuggest-accept
+#bindkey '^[h' autosuggest-accept
+#bindkey '^[h' backward-word
+#bindkey '^[l' forward-word
 
 zinit light zdharma/fast-syntax-highlighting
 
@@ -112,12 +123,49 @@ alias tl="tmux list-sessions"
 alias ta="tmux attach -t"
 
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-# use fd instead of find (faster), and exclue some directories
-export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git --exclude "**/__pycache__/*"'
+#source <(fzf --zsh)
+#[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+##use fd instead of find (faster), and exclue some directories
+#export FZF_DEFAULT_COMMAND='fdfind --type f --hidden --follow --exclude .git --exclude "**/__pycache__/*"'
+
+
+zinit ice lucid wait'0'
+zinit light joshskidmore/zsh-fzf-history-search
+export ZSH_FZF_HISTORY_SEARCH_FZF_EXTRA_ARGS=" --height 40% "
+
+#export FZF_DEFAULT_COMMAND='fdfind --type f --hidden --follow --exclude .git --exclude "**/__pycache__/*"'
 
 # for direnv
 #export DIRENV_LOG_FORMAT=""
 #eval "$(direnv hook zsh)"
 
-source  ~/.zshenv > /dev/null
+#source  ~/.zshenv > /dev/null
+
+# Load a few important annexes, without Turbo
+# (this is currently required for annexes)
+zinit light-mode for \
+    zdharma-continuum/zinit-annex-as-monitor \
+    zdharma-continuum/zinit-annex-bin-gem-node \
+    zdharma-continuum/zinit-annex-patch-dl \
+    zdharma-continuum/zinit-annex-rust
+
+### End of Zinit's installer chunk
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/theo/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/theo/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/theo/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/theo/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+
+zinit light zsh-users/zsh-autosuggestions
+bindkey '^ ' autosuggest-accept
