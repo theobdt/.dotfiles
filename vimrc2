@@ -1,0 +1,418 @@
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+set runtimepath+=~/.vim/bundle/Vundle.vim
+call vundle#begin('/home/theo/.vim/bundle')
+Plugin 'PatrBal/vim-textidote'
+"Plugin 'dpelle/vim-LanguageTool'
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'scrooloose/nerdcommenter'
+
+Plugin 'preservim/tagbar'
+
+Plugin 'davidhalter/jedi-vim'
+Plugin 'ervandew/supertab'
+
+Plugin 'jiangmiao/auto-pairs'
+
+Plugin 'dense-analysis/ale'
+
+Plugin 'lervag/vimtex'
+
+Plugin 'vimwiki/vimwiki'
+
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
+
+Plugin 'rafi/awesome-vim-colorschemes' 
+
+Plugin 'mhinz/vim-startify'
+
+Plugin 'junegunn/fzf'
+Plugin 'junegunn/fzf.vim'
+
+Plugin 'tpope/vim-fugitive'
+
+Plugin 'chrisbra/Recover.vim' 
+
+Plugin 'mbbill/undotree'
+
+Plugin 'junegunn/goyo.vim'
+Plugin 'dbeniamine/todo.txt-vim'
+
+
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+if has("autocmd")
+  filetype plugin indent on
+endif
+"""""""""""
+" GENERAL "
+"""""""""""
+let mapleader=" "
+
+" git / fugitive
+command Gc Git commit -v
+
+"enclose in quotes
+vnoremap mq c""<esc>P
+vnoremap ms c''<esc>P
+vnoremap mp c()<esc>P
+nnoremap <leader>mq viwc""<esc>P
+
+set wildmenu
+set wildignorecase
+set ignorecase
+set smartcase
+"avoid tmux typo
+nnoremap <C-a> <nop>
+
+" fix backspace
+set backspace=indent,eol,start
+
+"remap space key
+nnoremap <SPACE> <Nop>
+
+"fzf
+let g:fzf_action = {
+\ 'ctrl-x': 'split',
+\ 'ctrl-v': 'vsplit' }
+nnoremap <leader>y :GFiles<CR>
+nnoremap <leader>s :Files<CR>
+nnoremap <leader>v :Buffers<CR>
+nnoremap <leader>w :Rg<CR>
+let g:fzf_layout = { 'down': '~25%' }
+let g:AutoPairsShortcutToggle = '<F4>'
+
+"netrw
+let g:netrw_banner=0
+let g:netrw_liststyle=3
+
+""""""""""
+" VISUAL "
+""""""""""
+syntax enable
+set background=dark
+set number relativenumber
+set wrap
+colorscheme gruvbox
+let g:gruvbox_contrast_dark='medium'
+
+" change color foreground to white
+hi Normal ctermfg=15
+
+
+"""""""""""""""""""
+" CUSTOM BINDINGS "
+"""""""""""""""""""
+
+" system clipboard
+set clipboard=unnamedplus
+vnoremap [y "+y
+nnoremap [p "+p
+
+"insert date
+nnoremap <F3> i<C-R>=strftime("%Y-%m-%d %a %H:%M")<CR><Esc>
+inoremap <F3> <C-R>=strftime("%Y-%m-%d %a %H:%M")<CR>
+
+" Highlight search
+nnoremap <leader>a :set hlsearch!<CR>
+
+" Indent blocks
+vnoremap > >gv
+vnoremap < <gv
+
+" Go to normal mode
+inoremap jk <esc>
+inoremap JK <esc>
+inoremap jK <esc>
+noremap K <nop>
+noremap J <nop>
+
+set timeoutlen=1000 ttimeoutlen=0
+vnoremap <C-[> <esc>
+inoremap <C-[> <esc>
+
+" Add blank line
+nnoremap <Enter> o<Esc>
+
+" Update .vimrc easily
+nnoremap <leader>r :split $MYVIMRC<cr> 
+nnoremap <c-z> :source $MYVIMRC<cr>
+
+" New split open on the right
+set splitright
+
+" Move cursor to different panel
+nnoremap <c-j> <c-w><c-j>
+nnoremap <c-k> <c-w><c-k>
+nnoremap <c-h> <c-w><c-h>
+nnoremap <c-l> <c-w><c-l>
+
+" disable mouse
+set mouse=a
+
+"makefiles
+autocmd FileType make set list listchars=tab:>-
+
+let g:TodoTxtUseAbbrevInsertMode=1
+au filetype todo setlocal omnifunc=todo#Complete
+
+"""""""
+"NOTES"
+"""""""
+function! MyMarkdownLint() abort
+    setlocal shiftwidth=2 softtabstop=2 expandtab
+    "let g:markdown_folding=1
+    let g:markdown_folding=0
+    let g:markdown_flavor='github'
+    let g:vim_markdown_folding_style_pythonic = 1
+    "set conceallevel=0
+    set conceallevel=1
+    let g:vim_markdown_conceal_code_blocks = 0
+    "let g:vim_markdown_math = 1
+    let g:vim_markdown_math = 0
+    let g:vim_markdown_new_list_item_indent = 2
+    "set foldlevelstart=20
+    let g:vim_markdown_folding_level = 6
+    hi! link htmlH1 GruvboxRedBold
+    hi! link htmlH2 GruvboxOrangeBold
+    hi! link htmlH3 GruvboxYellow
+    hi! link htmlH4 GruvboxAqua
+    hi! link htmlH5 GruvboxBlue
+    hi! link htmlH6 GruvboxGray
+    hi! link mkdHeading GruvboxGray
+endfunction
+autocmd BufNewFile,BufReadPost *.md call MyMarkdownLint() | set filetype=markdown
+au BufNewFile,BufRead *.tex setlocal tabstop=2 softtabstop=2 shiftwidth=2
+
+
+let g:startify_file_number = 2
+let g:startify_custom_header=[]
+let g:startify_bookmarks = [{'r':'~/.config/vim/vimrc'},
+            \ {'nm':'~/notes/meeting_notes.md'},
+            \ {'ns':'~/notes/self.md'},
+            \ {'v':'~/.config/env'},
+            \ {'w':'~/vimwiki/index.md'},
+            \ {'t':'.'},
+            \ {'z':'~/.config/zsh/.zshrc'}]
+" PYTHON "
+""""""""""
+
+" Python setup
+filetype indent on
+set et
+set sw=4
+set smarttab
+set encoding=utf-8
+autocmd FileType python set colorcolumn=80
+
+"highlight self
+augroup python
+    autocmd!
+    autocmd FileType python
+                \   syn keyword pythonSelf self
+                \ | highlight def link pythonSelf Special
+augroup end
+
+
+let g:python_highlight_all = 1
+
+let g:ale_enabled = 0
+let g:ale_echo_cursor = 1
+let g:ale_set_balloons = 1
+let g:ale_echo_msg_format = '[%linter%] (%code%) %s'
+let g:ale_python_black_options ='-l 79' 
+let b:ale_linter_aliases = {'tex': ['tex', 'text']}
+
+let g:vimtex_compiler_latexmk = {'out_dir' : 'build'}
+let g:ale_linters = {'python': ['flake8'], 'tex':['languagetool']}
+let g:ale_fixers = {
+            \'python': ['trim_whitespace', 'remove_trailing_lines', 'black'],
+            \'tex': ['trim_whitespace', 'remove_trailing_lines', 'latexindent']
+            \}
+let g:ale_python_flake8_options ='--ignore=E203,W605,W503' 
+nmap <silent> <leader>d <Plug>(ale_previous_wrap)
+nmap <silent> <leader>f <Plug>(ale_next_wrap)
+nmap <silent> <leader>g <Plug>(ale_fix)
+nnoremap <leader>at :ALEToggle<CR>
+
+let g:ale_languagetool_executable="java"
+let g:ale_languagetool_options="-jar ~/Downloads/LanguageTool-5.5/languagetool-commandline.jar -l en-US -d MORFOLOGIK_RULE_EN_US"
+
+" jedi-vim
+autocmd FileType python setlocal completeopt-=preview
+let g:jedi#show_call_signatures = "1"
+let g:jedi#popup_on_dot = 0
+let g:jedi#popup_select_first = 0
+let g:jedi#goto_command = "<leader>d"
+let g:jedi#goto_assignments_command = "<leader>c"
+let g:jedi#goto_stubs_command = "<leader>x"
+let g:jedi#goto_definitions_command = ""
+let g:jedi#documentation_command = "<leader>e"
+let g:jedi#usages_command = "<leader>n"
+let g:jedi#completions_command = "<C-Space>"
+let g:jedi#rename_command = "<leader>q"
+nnoremap <leader>q :ccl<CR>
+
+" undotree
+let g:undotree_ShortIndicators=1
+nnoremap <leader>u :UndotreeToggle<cr>
+function g:Undotree_CustomMap()
+    nmap <buffer> J <plug>UndotreeNextState
+    nmap <buffer> K <plug>UndotreePreviousState
+endfunc
+
+"""""""""
+" LATEX "
+"""""""""
+" faster
+set nofoldenable
+"syn sync maxlines=100
+"syn sync minlines=20
+autocmd FileType tex :NoMatchParen
+au FileType tex setlocal nocursorline
+
+" For Latex files
+let g:tex_flavor = 'latex'
+let maplocalleader = "t" " also for todo.txt-vim
+let g:vimtex_fold_enabled=0
+set fillchars=fold:\ 
+let g:vimtex_quickfix_ignore_filters = ['Font Warning', 'Missing', 'nips']
+
+"""""""""""""""""
+" OTHER PLUGINS "
+"""""""""""""""""
+
+" count number of words
+function! WC()
+    let filename = expand("%")
+    let cmd = "detex " . filename . " | wc -w"
+    let result = system(cmd)
+    echo result 
+endfunction
+
+command WC call WC()
+
+"change cursor shape
+if has("autocmd")
+  au VimEnter,InsertLeave * silent execute '!echo -ne "\e[1 q"' | redraw!
+  au InsertEnter,InsertChange *
+    \ if v:insertmode == 'i' | 
+    \   silent execute '!echo -ne "\e[5 q"' | redraw! |
+    \ elseif v:insertmode == 'r' |
+    \   silent execute '!echo -ne "\e[3 q"' | redraw! |
+    \ endif
+  au VimLeave * silent execute '!echo -ne "\e[ q"' | redraw!
+endif
+
+"jump quickfix
+nnoremap [q :cp<CR>
+nnoremap ]q :cn<CR>
+nnoremap [Q :cfirst<CR>
+nnoremap ]Q :clast<CR>
+nnoremap <leader>m :ccl<CR>
+nnoremap <BS> <C-^>
+
+
+" custom commands
+command  Syid :echo synIDattr(synID(line("."), col("."), 1), "name")
+
+function! s:syntax_query() abort
+  for id in synstack(line("."), col("."))
+    "echo synIDattr(id, "name")
+    execute 'hi' synIDattr(id, "name")
+  endfor
+endfunction
+command! SyntaxQuery call s:syntax_query()
+nnoremap <leader>, :SyntaxQuery<CR>
+
+
+" VIMWIKI
+nmap <Plug>NoVimwikiIndex                  <Plug>VimwikiIndex
+nmap <Plug>NoVimwikiTabIndex               <Plug>VimwikiTabIndex
+nmap <Plug>NoVimwikiUISelect               <Plug>VimwikiUISelect
+nmap <Plug>NoVimwikiDiaryIndex             <Plug>VimwikiDiaryIndex
+nmap <Plug>NoVimwikiMakeDiaryNote          <Plug>VimwikiMakeDiaryNote
+nmap <Plug>NoVimwikiTabMakeDiaryNote       <Plug>VimwikiTabMakeDiaryNote
+nmap <Plug>NoVimwikiMakeYesterdayDiaryNote <Plug>VimwikiMakeYesterdayDiaryNote
+nmap <Plug>NoVimwikiMakeTomorrowDiaryNote  <Plug>VimwikiMakeTomorrowDiaryNote
+nmap <Plug>NoVimwiki2HTML                  <Plug>Vimwiki2HTML
+nmap <Plug>NoVimwiki2HTMLBrowse            <Plug>Vimwiki2HTMLBrowse
+nmap <Plug>NoVimwikiDiaryGenerateLinks     <Plug>VimwikiDiaryGenerateLinks
+nmap <Plug>NoVimwikiDeleteFile             <Plug>VimwikiDeleteFile
+nmap <Plug>NoVimwikiRenameFile             <Plug>VimwikiRenameFile
+nmap <Plug>NoVimwikiRenameFile             <Plug>VimwikiRenameFile
+nmap <Plug>NoVimwikiGoBackLink             <Plug>VimwikiGoBackLink
+"nmap <Plug>NoVimwikiFollowLink             <Plug>VimwikiFollowLink
+nmap <SPACE>l             <Plug>VimwikiFollowLink
+
+nmap <leader>nw                  <Plug>VimwikiIndex
+let g:vimwiki_list = [{'syntax': 'markdown', 'ext': '.md'}]
+let g:vimwiki_ext2syntax = {'.md': 'markdown'}
+let g:vimwiki_markdown_link_ext = 1
+let g:vimwiki_global_ext = 1
+let g:vimwiki_key_mappings = { 'table_mappings': 0 }
+
+let g:vimwiki_folding = 'expr'
+
+autocmd FileType vimwiki setlocal syntax=markdown
+
+autocmd FileType vimwiki setlocal foldenable
+
+augroup encrypted
+  au!
+
+  " First make sure nothing is written to ~/.viminfo while editing
+  " an encrypted file.
+  autocmd BufReadPre,FileReadPre *.gpg set viminfo=
+  " We don't want a swap file, as it writes unencrypted data to disk
+  autocmd BufReadPre,FileReadPre *.gpg set noswapfile
+
+  " Switch to binary mode to read the encrypted file
+  autocmd BufReadPre,FileReadPre *.gpg set bin
+  autocmd BufReadPre,FileReadPre *.gpg let ch_save = &ch|set ch=2
+  " (If you use tcsh, you may need to alter this line.)
+  autocmd BufReadPost,FileReadPost *.gpg '[,']!gpg2 --decrypt 2> /dev/null
+
+  " Switch to normal mode for editing
+  autocmd BufReadPost,FileReadPost *.gpg set nobin
+  autocmd BufReadPost,FileReadPost *.gpg let &ch = ch_save|unlet ch_save
+  autocmd BufReadPost,FileReadPost *.gpg execute ":doautocmd BufReadPost " . expand("%:r")
+
+  " Convert all text to encrypted text before writing
+  " (If you use tcsh, you may need to alter this line.)
+  "autocmd BufWritePre,FileWritePre *.gpg '[,']!gpg --default-recipient-self -ae 2>/dev/null
+  autocmd BufWritePre,FileWritePre *.gpg '[,']!gpg2 -c 2>/dev/null
+  " Undo the encryption so we are back in the normal text, directly
+  " after the file has been written.
+  autocmd BufWritePost,FileWritePost *.gpg u
+augroup END
+
+
+" tagbar
+nmap <F8> :TagbarToggle<CR>
+let g:tagbar_width = 40
+
+set complete=.
+
+
+" highlight word under cursor without jumping to it 
+nnoremap * :keepjumps normal! mi*`i<CR>
+
+" do not jump to word after search
+nnoremap / :setl hls \| let @/ = input('/')<cr>
+
+augroup SetCMS
+    autocmd FileType vimwiki let &l:commentstring='<!-- %s -->'
+augroup END
+
+
+"language tool
+"let g:languagetool_jar='/home/theo/tools/LanguageTool-6.6-SNAPSHOT/languagetool-commandline.jar'
+"let g:languagetool_cmd='/home/theo/tools/LanguageTool-6.6-SNAPSHOT/languagetool-commandline.jar'
+"let g:languagetool_cmd='java -jar /home/theo/tools/LanguageTool-6.6-SNAPSHOT/languagetool-commandline.jar'
+ 
+"textidote
+let g:textidote_jar = '~/Downloads/textidote.jar'
