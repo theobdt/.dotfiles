@@ -3,6 +3,7 @@ unbind C-b                  # remove bind for C-b
 set-option -g prefix C-a    
 bind-key C-a send-prefix
 
+
 set -g default-terminal "screen-256color" # colors!
 # Create Panes: window splitting
 # Split vertically
@@ -155,4 +156,6 @@ set -g @batt_icon_status_discharging '↓'
 # Add more plugins below this line
 
 # Run Tmux Plugin Manager
-run -b '/home/theo/.tmux/plugins/tpm/tpm'
+#run -b '/home/theo/.tmux/plugins/tpm/tpm'
+run -b '/opt/homebrew/opt/tpm/share/tpm/tpm'
+

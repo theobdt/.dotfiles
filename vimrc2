@@ -2,9 +2,10 @@ set nocompatible              " be iMproved, required
 filetype off                  " required
 
 set runtimepath+=~/.vim/bundle/Vundle.vim
-call vundle#begin('/home/theo/.vim/bundle')
-Plugin 'PatrBal/vim-textidote'
+call vundle#begin('/Users/theobodrito/.vim/bundle')
+"Plugin 'PatrBal/vim-textidote'
 "Plugin 'dpelle/vim-LanguageTool'
+"
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdcommenter'
 
@@ -20,6 +21,7 @@ Plugin 'dense-analysis/ale'
 Plugin 'lervag/vimtex'
 
 Plugin 'vimwiki/vimwiki'
+"Cause file event when entering normal mode -> triggers fswatch 
 
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
@@ -33,12 +35,12 @@ Plugin 'junegunn/fzf.vim'
 
 Plugin 'tpope/vim-fugitive'
 
-Plugin 'chrisbra/Recover.vim' 
+"Plugin 'chrisbra/Recover.vim' 
 
-Plugin 'mbbill/undotree'
+"Plugin 'mbbill/undotree'
 
-Plugin 'junegunn/goyo.vim'
-Plugin 'dbeniamine/todo.txt-vim'
+"Plugin 'junegunn/goyo.vim'
+"Plugin 'dbeniamine/todo.txt-vim'
 
 
 call vundle#end()            " required
@@ -108,9 +110,9 @@ hi Normal ctermfg=15
 """""""""""""""""""
 
 " system clipboard
-set clipboard=unnamedplus
-vnoremap [y "+y
-nnoremap [p "+p
+"set clipboard=unnamedplus
+"vnoremap [y "+y
+"nnoremap [p "+p
 
 "insert date
 nnoremap <F3> i<C-R>=strftime("%Y-%m-%d %a %H:%M")<CR><Esc>
@@ -416,3 +418,5 @@ augroup END
  
 "textidote
 let g:textidote_jar = '~/Downloads/textidote.jar'
+
+ set directory=$HOME/.vim/swapfiles//

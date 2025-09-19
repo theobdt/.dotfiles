@@ -1,6 +1,11 @@
 ## PLUGINS
 #source $XDG_CONFIG_HOME/zsh/zinit/bin/zinit.zsh
-source /home/theo/.local/share/zinit/zinit.git/zinit.zsh
+#source /home/theo/.local/share/zinit/zinit.git/zinit.zsh
+
+source /opt/homebrew/opt/zinit/zinit.zsh
+
+   
+ 
 
 export HISTFILE="/home/theo/.history"
 export PATH="$PATH:/home/theo/.scripts"
@@ -51,6 +56,8 @@ zinit wait'!' lucid for \
 zinit light zdharma/fast-syntax-highlighting
 
 
+zinit ice depth=1
+zinit light jeffreytse/zsh-vi-mode
 
 # Change cursor shape for different vi modes.
 #function zle-keymap-select {
@@ -111,7 +118,7 @@ bindkey '^e' edit-command-line
 
 #aliases
 [ -f ~/.bash_aliases ] && source ~/.bash_aliases
-alias ls="ls --color=auto"
+#alias ls="ls --color=auto"
 alias la="ls -a"
 alias e="vim"
 alias v="view"
@@ -123,6 +130,9 @@ alias gs="git status"
 alias ca="conda activate"
 alias tl="tmux list-sessions"
 alias ta="tmux attach -t"
+alias vim="/opt/homebrew/bin/vim"
+alias vi="/opt/homebrew/bin/vim"
+alias e="/opt/homebrew/bin/vim"
 
 
 #source <(fzf --zsh)
@@ -172,3 +182,14 @@ unset __conda_setup
 zinit light zsh-users/zsh-autosuggestions
 bindkey '^ ' autosuggest-accept
 #PROMPT='%F{green}%*%f %F{blue}%~%f %F{red}${vcs_info_msg_0_}%f$ '
+
+. "$HOME/.local/bin/env"
+export PATH="/opt/homebrew/bin:$PATH"
+
+# share history between tmux panes
+setopt inc_append_history
+
+
+export CLICOLOR=1
+export LSCOLORS=gxfxhxDxfxhxhxhxhxcxcx
+#export LSCOLORS='di=34:ln=36:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43'
