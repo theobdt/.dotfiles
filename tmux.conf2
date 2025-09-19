@@ -156,6 +156,6 @@ set -g @batt_icon_status_discharging '↓'
 # Add more plugins below this line
 
 # Run Tmux Plugin Manager
-#run -b '/home/theo/.tmux/plugins/tpm/tpm'
-run -b '/opt/homebrew/opt/tpm/share/tpm/tpm'
+run -b "$HOME/.tmux/plugins/tpm/tpm"
+#run -b '/opt/homebrew/opt/tpm/share/tpm/tpm'
 

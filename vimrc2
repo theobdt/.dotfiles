@@ -2,7 +2,8 @@ set nocompatible              " be iMproved, required
 filetype off                  " required
 
 set runtimepath+=~/.vim/bundle/Vundle.vim
-call vundle#begin('/Users/theobodrito/.vim/bundle')
+"call vundle#begin('/Users/theobodrito/.vim/bundle')
+call vundle#begin("$HOME/.vim/bundle")
 "Plugin 'PatrBal/vim-textidote'
 "Plugin 'dpelle/vim-LanguageTool'
 "
