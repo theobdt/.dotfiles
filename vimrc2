@@ -12,6 +12,8 @@ Plugin 'scrooloose/nerdcommenter'
 
 Plugin 'preservim/tagbar'
 
+Plugin 'preservim/nerdtree'
+
 Plugin 'davidhalter/jedi-vim'
 Plugin 'ervandew/supertab'
 
@@ -35,6 +37,8 @@ Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
 
 Plugin 'tpope/vim-fugitive'
+
+Plugin 'will133/vim-dirdiff'
 
 "Plugin 'chrisbra/Recover.vim' 
 
@@ -116,8 +120,11 @@ hi Normal ctermfg=15
 "nnoremap [p "+p
 
 "insert date
-nnoremap <F3> i<C-R>=strftime("%Y-%m-%d %a %H:%M")<CR><Esc>
-inoremap <F3> <C-R>=strftime("%Y-%m-%d %a %H:%M")<CR>
+"nnoremap <F3> i<C-R>=strftime("%Y-%m-%d %a %H:%M")<CR><Esc>
+"inoremap <F3> <C-R>=strftime("%Y-%m-%d %a %H:%M")<CR>
+"nnoremap <F3> i<C-R>=### strftime("%Y-%m-%d")<CR><Esc>
+nnoremap <F3> i<C-R>="### " . strftime("%Y-%m-%d")<CR><Esc>
+inoremap <F3> <C-R>="### " . strftime("%Y-%m-%d")<CR>
 
 " Highlight search
 nnoremap <leader>a :set hlsearch!<CR>
@@ -421,3 +428,60 @@ augroup END
 let g:textidote_jar = '~/Downloads/textidote.jar'
 
  set directory=$HOME/.vim/swapfiles//
+
+nnoremap <C-t> :NERDTreeToggle<CR>
+language messages en_US
+
+
+"disable copilot on certain files
+"autocmd FileType markdown,gitcommit,tex Copilot disable
+
+            
+"enable ALE only on python files to avoid lags
+"let g:ale_enabled = 0
+"autocmd FileType python let b:ale_enabled = 1
+
+" ignore unwanted files
+let NERDTreeIgnore = ['^((?!ebm_policy).)*$']
+
+
+"use system clipboard as primary clipboard
+"set clipboard=unnamedplus
+
+ "Map <leader>y to yank to system clipboard
+"nnoremap y "+y
+"vnoremap y "+y
+"" Map <leader>p to paste from system clipboard
+"nnoremap p "+p
+"vnoremap p "+p
+"
+
+" Toggle Copilot with <leader>cp
+let g:copilot_enabled = 1
+function! ToggleCopilot()
+  if g:copilot_enabled
+    let g:copilot_enabled = 0
+    Copilot disable
+    echo "Copilot disabled"
+  else
+    let g:copilot_enabled = 1
+    Copilot enable
+    echo "Copilot enabled"
+  endif
+endfunction
+nnoremap <leader>cp :call ToggleCopilot()<CR>
+
+
+" pdf reader with automatic pdf refresh
+let g:vimtex_view_method = 'skim'
+
+
+
+" set vim language to english
+set langmenu=en_US
+let $LANG = 'en_US'
+source $VIMRUNTIME/delmenu.vim
+source $VIMRUNTIME/menu.vim
+
+" color cursor
+highlight Cursor guifg=steelblue guibg=black

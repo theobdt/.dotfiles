@@ -5,6 +5,7 @@ bind-key C-a send-prefix
 
 
 set -g default-terminal "screen-256color" # colors!
+set -g focus-events on                    # fix nvim redraw on pane resize
 # Create Panes: window splitting
 # Split vertically
 unbind %
@@ -159,3 +160,6 @@ set -g @batt_icon_status_discharging '↓'
 run -b "$HOME/.tmux/plugins/tpm/tpm"
 #run -b '/opt/homebrew/opt/tpm/share/tpm/tpm'
 
+set-window-option -g mode-keys vi
+bind-key -T copy-mode-vi v send -X begin-selection
+bind-key -T copy-mode-vi V send -X select-line
